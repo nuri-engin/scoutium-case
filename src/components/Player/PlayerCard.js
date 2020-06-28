@@ -32,29 +32,29 @@ class PlayerCard extends Component {
       { display_name, image_url, position, subMinDuration } = player;
 
     let buttonName =
-      cardType === "allplayers" ? (
+      cardType === window.consts.cardType.allplayers ? (
         <div>
           <TiTick style={{ marginTop: -3 }} />
-          PICK
+            {window.translations.pick}
         </div>
       ) : (
         <MdDelete style={{ fontSize: 13, color: "#9c9d9e" }} />
       );
 
     let defineOnClickMethod =
-      cardType === "allplayers"
+      cardType === window.consts.cardType.allplayers
         ? () => this.addPlayer(player)
         : () => this.removePlayer(player.id, player);
 
     let subMinColor =
-        cardType === "lineup" ? { color: "#e63846" } : { color: "#12c990" },
+        cardType === window.consts.cardType.lineup ? { color: "#e63846" } : { color: "#12c990" },
       subMinType =
-        cardType === "lineup" ? `⬇${subMinDuration}'` : `⬆${subMinDuration}'`,
+        cardType === window.consts.cardType.lineup ? `⬇${subMinDuration}'` : `⬆${subMinDuration}'`,
       subMinValue = subMinDuration ? subMinType : "";
     return (
       <Media style={{ marginTop: 12 }}>
         <img
-          style={{ marginTop: 8, bordßrRadius: "20%" }}
+          style={{ marginTop: 8, borderRadius: "20%" }}
           width={34}
           height={34}
           className="mr-2"
@@ -79,14 +79,14 @@ class PlayerCard extends Component {
         </Media.Body>
         <div>
           <div style={{ fontSize: 13, ...subMinColor }}>
-            {cardType !== "allplayers" && subMinValue}
+            {cardType !== window.consts.cardType.allplayers && subMinValue}
           </div>
           <Row>
             <Col>
-              {cardType !== "substitutes" ? (
+              {cardType !== window.consts.cardType.substitutes ? (
                 <Button
                   hidden={confirmationDone}
-                  disabled={cardType === "allplayers" && playersCompleted}
+                  disabled={cardType === window.consts.cardType.allplayers && playersCompleted}
                   onClick={defineOnClickMethod}
                   style={{ fontSize: 11, textDecoration: "none" }}
                   variant="link"

@@ -3,19 +3,15 @@ import { Card, Container, Button } from "react-bootstrap";
 import PlayerCard from "../Player/PlayerCard";
 import { EmptyTextWrapper, TeamNameWrapper } from "../../styles";
 import { connect } from "react-redux";
-import AddSubstituteModal from "../Modals/AddSubstituteModal.js";
-
-const defaultTexts = {
-  ENTER_PLAYER_NAME: "Enter player name",
-};
+import SubstituteModal from "../Modals/SubstituteModal.js";
 
 class TeamCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       addSubPlayerModal: false,
-      inPlayer: defaultTexts.ENTER_PLAYER_NAME,
-      outPlayer: defaultTexts.ENTER_PLAYER_NAME,
+      inPlayer: window.translations.enterPlayerName,
+      outPlayer: window.translations.enterPlayerName,
       subMin: "",
       showError: false,
     };
@@ -23,8 +19,8 @@ class TeamCard extends Component {
   handleModalClose = () => {
     this.setState({ addSubPlayerModal: false });
     this.setState({
-      inPlayer: defaultTexts.ENTER_PLAYER_NAME,
-      outPlayer: defaultTexts.ENTER_PLAYER_NAME,
+      inPlayer: window.translations.enterPlayerName,
+      outPlayer: window.translations.enterPlayerName,
       subMin: "",
     });
   };
@@ -40,16 +36,11 @@ class TeamCard extends Component {
         substitutePlayers,
         confirmationDone,
       } = this.props,
-      lineupEmptyText = "You haven’t selected any player for lineup yet",
-      substitutesEmptyText =
-        "Please pick 11 players for lineup before creating any substitutions",
-      cardEmptyText =
-        cardType === "lineup" ? lineupEmptyText : substitutesEmptyText,
-      loadingMsg = "Loading Players ...",
-      teamName = "Beşiktaş JK";
+      cardEmptyText = cardType === window.consts.cardType.lineup ? window.translations.lineupEmptyText : window.translations.substitutesEmptyText,
+      teamName = window.consts.DEFAULTS.team;
 
     let cardContainerScroll =
-      cardType === "allplayers" && confirmationDone
+      cardType === window.consts.cardType.allplayers && confirmationDone
         ? { overflowY: "hidden", overflowX: "hidden" }
         : { overflowY: "scroll", overflowX: "hidden" };
 
@@ -64,7 +55,7 @@ class TeamCard extends Component {
           }}
         >
           <Card.Body>
-            <Card.Title hidden={cardType === "allplayers" && confirmationDone}>
+            <Card.Title hidden={cardType === window.consts.cardType.allplayers && confirmationDone}>
               {cardTitle}
             </Card.Title>
             <Container
@@ -74,7 +65,7 @@ class TeamCard extends Component {
                 ...cardContainerScroll,
               }}
             >
-              {confirmationDone && cardType === "allplayers" ? (
+              {confirmationDone && cardType === window.consts.cardType.allplayers ? (
                 <>
                   <TeamNameWrapper>
                     <img
@@ -100,8 +91,8 @@ class TeamCard extends Component {
                     );
                   })}
                 </div>
-              ) : cardType === "allplayers" ? (
-                <EmptyTextWrapper>{loadingMsg}</EmptyTextWrapper>
+              ) : cardType === window.consts.cardType.allplayers ? (
+                <EmptyTextWrapper>{ window.translations.loadingMsg}</EmptyTextWrapper>
               ) : playersCompleted ? (
                 <Button
                   hidden={confirmationDone}
@@ -114,7 +105,7 @@ class TeamCard extends Component {
               ) : (
                 <EmptyTextWrapper>{cardEmptyText}</EmptyTextWrapper>
               )}
-              {cardType === "substitutes" && cardPlayers.length > 0 ? (
+              {cardType === window.consts.cardType.substitutes && cardPlayers.length > 0 ? (
                 <Button
                   hidden={confirmationDone}
                   disabled={substitutePlayers.length > 2}
@@ -130,7 +121,7 @@ class TeamCard extends Component {
             </Container>
           </Card.Body>
         </Card>
-        <AddSubstituteModal
+        <SubstituteModal
           addSubPlayerModal={this.state.addSubPlayerModal}
           modalClose={this.handleModalClose}
         />

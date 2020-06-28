@@ -14,7 +14,7 @@ function NavBar() {
             marginLeft: "20%",
           }}
         >
-          SCOUTIUM
+            {window.consts.DEFAULTS.brand}
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">

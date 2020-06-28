@@ -23,7 +23,7 @@ class TopBar extends Component {
               src="./assets/done@2x.png"
               alt="done"
             />
-            Squad saved successfully
+            {window.translations.squadSavedSuccessfully}
           </ConfirmMsgWrapper>
         ) : (
           <Navbar>
@@ -36,7 +36,7 @@ class TopBar extends Component {
               alt="teamLogo"
             />
             <Navbar.Brand style={{ color: "#02063f", fontWeight: "bold" }}>
-              Beşiktaş JK
+              {window.consts.DEFAULTS.team}
             </Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end"></Navbar.Collapse>
@@ -51,7 +51,7 @@ class TopBar extends Component {
                 fontSize: 12,
               }}
             >
-              Confirm
+              {window.translations.confirm}
             </Button>
           </Navbar>
         )}

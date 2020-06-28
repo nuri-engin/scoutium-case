@@ -6,6 +6,8 @@ import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import store from "./store";
 import { GlobalStyle } from "./styles";
+import "./resource/translations";
+import "./resource/consts";
 import "./index.css";
 
 ReactDOM.render(

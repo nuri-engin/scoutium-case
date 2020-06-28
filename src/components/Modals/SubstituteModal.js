@@ -7,16 +7,12 @@ import {
 import { connect } from "react-redux";
 import { ErrorMsgWrapper } from "../../styles";
 
-const defaultTexts = {
-  ENTER_PLAYER_NAME: "Enter player name",
-};
-
-class AddSubstituteModal extends Component {
+class SubstituteModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inPlayer: defaultTexts.ENTER_PLAYER_NAME,
-      outPlayer: defaultTexts.ENTER_PLAYER_NAME,
+      inPlayer: window.translations.enterPlayerName,
+      outPlayer: window.translations.enterPlayerName,
       subMin: "",
       showError: false,
     };
@@ -25,8 +21,8 @@ class AddSubstituteModal extends Component {
     let value = e.target.value,
       outPlayerValue = this.state.outPlayer;
     if (
-      value !== defaultTexts.ENTER_PLAYER_NAME &&
-      outPlayerValue !== defaultTexts.ENTER_PLAYER_NAME
+      value !== window.translations.enterPlayerName&&
+      outPlayerValue !== window.translations.enterPlayerName
     ) {
       this.setState({ showError: false });
     }
@@ -36,8 +32,8 @@ class AddSubstituteModal extends Component {
     let value = e.target.value,
       inPlayerValue = this.state.inPlayer;
     if (
-      value !== defaultTexts.ENTER_PLAYER_NAME &&
-      inPlayerValue !== defaultTexts.ENTER_PLAYER_NAME
+      value !== window.translations.enterPlayerName &&
+      inPlayerValue !== window.translations.enterPlayerName
     ) {
       this.setState({ showError: false });
     }
@@ -52,8 +48,8 @@ class AddSubstituteModal extends Component {
       { allPlayers, lineupPlayers } = this.props;
 
     if (
-      inPlayer === defaultTexts.ENTER_PLAYER_NAME ||
-      outPlayer === defaultTexts.ENTER_PLAYER_NAME
+      inPlayer === window.translations.enterPlayerName ||
+      outPlayer === window.translations.enterPlayerName
     ) {
       this.setState({ showError: true });
       return;
@@ -74,8 +70,8 @@ class AddSubstituteModal extends Component {
     this.props.addSubstitutePlayer(newInPlayer);
     this.props.modalClose();
     this.setState({
-      inPlayer: defaultTexts.ENTER_PLAYER_NAME,
-      outPlayer: defaultTexts.ENTER_PLAYER_NAME,
+      inPlayer: window.translations.enterPlayerName,
+      outPlayer: window.translations.enterPlayerName,
       subMin: "",
     });
   };
@@ -89,7 +85,7 @@ class AddSubstituteModal extends Component {
           src="./assets/error.png"
           alt="error"
         />
-        Please complete the form .
+        {window.translations.pleaseCompleteTheForm}
       </ErrorMsgWrapper>
     );
   };
@@ -110,11 +106,11 @@ class AddSubstituteModal extends Component {
         centered
       >
         <Modal.Body>
-          <span style={{ color: "#02063f", fontSize: 16 }}>Add Substition</span>
+          <span style={{ color: "#02063f", fontSize: 16 }}>{window.translations.addSubstition}</span>
           <Form onSubmit={this.addSubPlayer}>
             <Form.Group controlId="outPlayer">
               <Form.Label style={{ color: "#586f8f", fontSize: 12 }}>
-                OUT PLAYER
+                {window.translations.outPlayer}
               </Form.Label>
               <Form.Control
                 required
@@ -122,8 +118,8 @@ class AddSubstituteModal extends Component {
                 value={this.state.outPlayer}
                 as="select"
               >
-                <option disabled value={defaultTexts.ENTER_PLAYER_NAME}>
-                  Enter player name
+                <option disabled value={window.translations.enterPlayerName}>
+                  {window.translations.enterPlayerName}
                 </option>
                 {lineupPlayers.map((player) => {
                   return <option key={player.id}>{player.display_name}</option>;
@@ -132,7 +128,7 @@ class AddSubstituteModal extends Component {
             </Form.Group>
             <Form.Group controlId="inPlayer">
               <Form.Label style={{ color: "#586f8f", fontSize: 12 }}>
-                IN PLAYER
+                {window.translations.inPlayer}
               </Form.Label>
               <Form.Control
                 required
@@ -140,8 +136,8 @@ class AddSubstituteModal extends Component {
                 value={this.state.inPlayer}
                 as="select"
               >
-                <option disabled value={defaultTexts.ENTER_PLAYER_NAME}>
-                  Enter player name
+                <option disabled value={window.translations.enterPlayerName}>
+                  {window.translations.enterPlayerName}
                 </option>
                 {allPlayers.map((player) => {
                   return <option key={player.id}>{player.display_name}</option>;
@@ -151,7 +147,7 @@ class AddSubstituteModal extends Component {
             <Form.Group controlId="substitutionMin">
               <Form.Label>
                 <span style={{ color: "#586f8f", fontSize: 12 }}>
-                  SUBSTITUTION MINUTE
+                  {window.translations.substitutionMinute}
                 </span>
               </Form.Label>
               <Form.Control
@@ -160,7 +156,7 @@ class AddSubstituteModal extends Component {
                 value={this.state.subMin}
                 type="number"
                 min="1"
-                placeholder="Enter minute of substitution"
+                placeholder={window.translations.enterMinuteOfSubstitution}
               />
             </Form.Group>
             <Form.Group as={Row}>
@@ -177,7 +173,7 @@ class AddSubstituteModal extends Component {
                     marginRight: 5,
                   }}
                 >
-                  Cancel
+                  {window.translations.cancel}
                 </Button>
                 <Button
                   size="sm"
@@ -190,7 +186,7 @@ class AddSubstituteModal extends Component {
                     backgroundColor: "#3852ff",
                   }}
                 >
-                  Add
+                  {window.translations.add}
                 </Button>
               </Col>
             </Form.Group>
@@ -216,4 +212,4 @@ const mapStateToProps = (state) => ({
   confirmationDone: state.confirmationDone,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddSubstituteModal);
+export default connect(mapStateToProps, mapDispatchToProps)(SubstituteModal);

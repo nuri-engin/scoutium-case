@@ -17,22 +17,22 @@ class TeamCardsContainer extends Component {
         <Row style={{ height: "100%" }}>
           <Col>
             <TeamCard
-              cardType="allplayers"
-              cardTitle="All Players"
+              cardType={window.consts.cardType.allplayers}
+              cardTitle={window.translations.allPlayers}
               cardPlayers={allPlayers}
             />
           </Col>
           <Col>
             <TeamCard
-              cardType="lineup"
-              cardTitle="Lineup"
+              cardType={window.consts.cardType.lineup}
+              cardTitle={window.translations.lineup}
               cardPlayers={lineupPlayers}
             />
           </Col>
           <Col>
             <TeamCard
-              cardType="substitutes"
-              cardTitle="Substitutes"
+              cardType={window.consts.cardType.substitutes}
+              cardTitle={window.translations.substitutes}
               cardPlayers={substitutePlayers}
             />
           </Col>
