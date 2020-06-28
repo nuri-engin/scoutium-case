@@ -3,7 +3,7 @@ export const PlayerCardCtrl = {
         let { lineupPlayers } = scope.props;
         
         if (lineupPlayers.length <= 11) {
-            scope.props.addLineupPlayerAction(player);
+            scope.props.addLineupPlayer(player);
             scope.props.removeFromAllPlayer(player.id);
         }
         
@@ -11,7 +11,7 @@ export const PlayerCardCtrl = {
     },
     
     removePlayer: (player, scope) => {
-        scope.props.removeLineupPlayerAction(player.id);
+        scope.props.removeLineupPlayer(player.id);
         scope.props.addToAllPlayers(player);
         scope.props.togglePlayersCompleted(false);
     }

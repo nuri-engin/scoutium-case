@@ -1,9 +1,8 @@
 import axios from "axios";
-
-export const SET_PLAYERS_DATA = "SET_PLAYERS_DATA";
+import {ACTIONTYPES} from "../typeNames";
 
 export const setPlayersData = (players) => ({
-  type: SET_PLAYERS_DATA,
+  type: ACTIONTYPES.SET_PLAYERS_DATA,
   payload: { players },
 });
 

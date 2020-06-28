@@ -1,14 +1,4 @@
-import {
-  ADD_LINEUP_PLAYER,
-  REMOVE_LINEUP_PLAYER,
-  TOGGLE_PLAYERS_COMPLETED,
-  ADD_SUBSTITUTES_PLAYER,
-  UPDATE_LINEUP_PLAYER_SUBMIN,
-  HANDLE_CONFIRMATION_DONE,
-  REMOVE_FROM_ALLPLAYER,
-  ADD_TO_ALLPLAYER,
-} from "../actions/playersActiontypes.js";
-import { SET_PLAYERS_DATA } from "../actions/middleware/playersList.js";
+import {ACTIONTYPES} from "../actions/typeNames";
 
 const initState = {
   allPlayers: [],
@@ -20,19 +10,21 @@ const initState = {
 };
 
 /**
- * There will be 7 main store process;
+ * There will be 9 main store process;
  * 1 container and 4 component handles the data process.
  *
  * # All Players component related;
  * SET_PLAYERS_DATA {@link TeamCardsContainer.componentDidMount};
  *
  * # Lineup addition/removing related.
+ * ADD_TO_ALLPLAYER {@link PlayerCard.componentDidMount}
+ * REMOVE_FROM_ALLPLAYER {@link PlayerCard.componentDidMount}
  * ADD_LINEUP_PLAYER {@link PlayerCard.mapDispatchToProps}
  * REMOVE_LINEUP_PLAYER {@link PlayerCard.mapDispatchToProps}
  *
  * # Substitution selection related;
- * ADD_SUBSTITUTES_PLAYER {@link TeamCard.mapDispatchToProps}
- * UPDATE_LINEUP_PLAYER_SUBMIN {@link TeamCard.mapDispatchToProps}
+ * ADD_SUBSTITUTES_PLAYER {@link SubstituteModal.mapDispatchToProps}
+ * UPDATE_LINEUP_PLAYER_SUBMIN {@link SubstituteModal.mapDispatchToProps}
  *
  * # Confirmation process related;
  * TOGGLE_PLAYERS_COMPLETED {@link PlayerCard.mapDispatchToProps}
@@ -40,42 +32,22 @@ const initState = {
  */
 export const rootReducer = (state = initState, action) => {
   let lineupPlayers, allPlayers;
+  
   switch (action.type) {
-    case SET_PLAYERS_DATA:
+    case ACTIONTYPES.SET_PLAYERS_DATA:
       return {
         ...state,
         loading: false,
         allPlayers: action.payload.players,
       };
       
-    case ADD_TO_ALLPLAYER:
+    case ACTIONTYPES.ADD_TO_ALLPLAYER:
       return {
         ...state,
         allPlayers: [action.payload, ...state.allPlayers],
       };
-      
-    case ADD_LINEUP_PLAYER:
-      return {
-        ...state,
-        lineupPlayers: [...state.lineupPlayers, action.payload],
-      };
-  
-    case REMOVE_LINEUP_PLAYER:
-      lineupPlayers = state.lineupPlayers.filter((lineupPlayer) => {
-        return lineupPlayer.id !== action.payload;
-      });
-      return {
-        ...state,
-        lineupPlayers,
-      };
-      
-    case ADD_SUBSTITUTES_PLAYER:
-      return {
-        ...state,
-        substitutePlayers: [...state.substitutePlayers, action.payload],
-      };
     
-    case REMOVE_FROM_ALLPLAYER:
+    case ACTIONTYPES.REMOVE_FROM_ALLPLAYER:
       allPlayers = state.allPlayers.filter((player) => {
         return player.id !== action.payload;
       });
@@ -84,7 +56,28 @@ export const rootReducer = (state = initState, action) => {
         allPlayers,
       };
       
-    case UPDATE_LINEUP_PLAYER_SUBMIN:
+    case ACTIONTYPES.ADD_LINEUP_PLAYER:
+      return {
+        ...state,
+        lineupPlayers: [...state.lineupPlayers, action.payload],
+      };
+  
+    case ACTIONTYPES.REMOVE_LINEUP_PLAYER:
+      lineupPlayers = state.lineupPlayers.filter((lineupPlayer) => {
+        return lineupPlayer.id !== action.payload;
+      });
+      return {
+        ...state,
+        lineupPlayers,
+      };
+      
+    case ACTIONTYPES.ADD_SUBSTITUTES_PLAYER:
+      return {
+        ...state,
+        substitutePlayers: [...state.substitutePlayers, action.payload],
+      };
+      
+    case ACTIONTYPES.UPDATE_LINEUP_PLAYER_SUBMIN:
       lineupPlayers = state.lineupPlayers.map((lineupplayer) => {
         if (lineupplayer.id === action.payload.playerID) {
           return { ...lineupplayer, subMinDuration: action.payload.submin };
@@ -96,13 +89,13 @@ export const rootReducer = (state = initState, action) => {
         lineupPlayers,
       };
       
-    case TOGGLE_PLAYERS_COMPLETED:
+    case ACTIONTYPES.TOGGLE_PLAYERS_COMPLETED:
       return {
         ...state,
         playersCompleted: action.payload,
       };
       
-    case HANDLE_CONFIRMATION_DONE:
+    case ACTIONTYPES.HANDLE_CONFIRMATION_DONE:
       return {
         ...state,
         confirmationDone: true,

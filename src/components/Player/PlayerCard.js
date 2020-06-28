@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Media, Button, Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import {
-  addLineupPlayerAction,
-  removeLineupPlayerAction,
+  addLineupPlayer,
+  removeLineupPlayer,
   togglePlayersCompleted,
   removeFromAllPlayer,
   addToAllPlayers,
@@ -91,9 +91,9 @@ class PlayerCard extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addLineupPlayerAction: (player) => dispatch(addLineupPlayerAction(player)),
-  removeLineupPlayerAction: (playerID) =>
-    dispatch(removeLineupPlayerAction(playerID)),
+  addLineupPlayer: (player) => dispatch(addLineupPlayer(player)),
+  removeLineupPlayer: (playerID) =>
+    dispatch(removeLineupPlayer(playerID)),
   togglePlayersCompleted: (value) => dispatch(togglePlayersCompleted(value)),
   removeFromAllPlayer: (playerID) => dispatch(removeFromAllPlayer(playerID)),
   addToAllPlayers: (player) => dispatch(addToAllPlayers(player)),
