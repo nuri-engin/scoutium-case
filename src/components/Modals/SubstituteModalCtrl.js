@@ -2,36 +2,25 @@ import React from "react";
 import { ErrorMsgWrapper } from "../../styles";
 
 export const SubstituteModalCtrl = {
-    handleInPlayerChange: (e, scope) => {
-        let value = e.target.value,
-            outPlayerValue = scope.state.outPlayer;
-        if (
-            value !== window.translations.enterPlayerName&&
-            outPlayerValue !== window.translations.enterPlayerName
-        ) {
-            scope.setState({ showError: false });
-        }
-        scope.setState({ inPlayer: value });
-    },
+    handleSubMinChange: (e, scope) => scope.setState({ subMin: e.target.value }),
     
-    handleOutPlayerChange: (e, scope) => {
+    handlePlayerChange: (e, scope) => {
         let value = e.target.value,
-            inPlayerValue = scope.state.inPlayer;
+            stateValue = scope.state[e.target.name];
+        
         if (
             value !== window.translations.enterPlayerName &&
-            inPlayerValue !== window.translations.enterPlayerName
+            stateValue !== window.translations.enterPlayerName
         ) {
             scope.setState({ showError: false });
         }
-        scope.setState({ outPlayer: e.target.value });
-    },
-    
-    handleSubMinChange: (e, scope) => {
-        scope.setState({ subMin: e.target.value });
+        
+        scope.setState({ [e.target.name]: value });
     },
     
     addSubPlayer: (e, scope) => {
         e.preventDefault();
+        
         let { inPlayer, outPlayer, subMin } = scope.state,
             { allPlayers, lineupPlayers } = scope.props;
         
@@ -39,8 +28,7 @@ export const SubstituteModalCtrl = {
             inPlayer === window.translations.enterPlayerName ||
             outPlayer === window.translations.enterPlayerName
         ) {
-            scope.setState({ showError: true });
-            return;
+            return scope.setState({ showError: true });
         }
         
         let newInPlayer = allPlayers.find(

@@ -1,4 +1,6 @@
 export const TeamCardCtrl = {
+    handleModalOpen: (scope) => scope.setState({ addSubPlayerModal: true }),
+    
     handleModalClose: (scope) => {
         scope.setState({ addSubPlayerModal: false });
         scope.setState({
@@ -6,9 +8,5 @@ export const TeamCardCtrl = {
             outPlayer: window.translations.enterPlayerName,
             subMin: "",
         });
-    },
-    
-    handleModalOpen: (scope) => {
-        scope.setState({ addSubPlayerModal: true });
     }
 };

@@ -8,5 +8,10 @@ module.exports = global.consts = {
         allplayers: "allplayers",
         lineup: "lineup",
         substitutes: "substitutes"
+    },
+    
+    inputNames: {
+        inPlayer: "inPlayer",
+        outPlayer: "outPlayer"
     }
 };

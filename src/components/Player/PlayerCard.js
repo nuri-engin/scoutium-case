@@ -92,8 +92,7 @@ class PlayerCard extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   addLineupPlayer: (player) => dispatch(addLineupPlayer(player)),
-  removeLineupPlayer: (playerID) =>
-    dispatch(removeLineupPlayer(playerID)),
+  removeLineupPlayer: (playerID) => dispatch(removeLineupPlayer(playerID)),
   togglePlayersCompleted: (value) => dispatch(togglePlayersCompleted(value)),
   removeFromAllPlayer: (playerID) => dispatch(removeFromAllPlayer(playerID)),
   addToAllPlayers: (player) => dispatch(addToAllPlayers(player)),

@@ -43,7 +43,8 @@ class SubstituteModal extends Component {
               </Form.Label>
               <Form.Control
                 required
-                onChange={(e) => ctrl.handleOutPlayerChange(e, this)}
+                name = {window.consts.inputNames.outPlayer}
+                onChange={(e) => ctrl.handlePlayerChange(e, this)}
                 value={this.state.outPlayer}
                 as="select"
               >
@@ -61,7 +62,8 @@ class SubstituteModal extends Component {
               </Form.Label>
               <Form.Control
                 required
-                onChange={(e) => ctrl.handleInPlayerChange(e, this)}
+                name = {window.consts.inputNames.inPlayer}
+                onChange={(e) => ctrl.handlePlayerChange(e, this)}
                 value={this.state.inPlayer}
                 as="select"
               >
