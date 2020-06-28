@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button, Modal, Form, Row, Col } from "react-bootstrap";
 import {
   addSubstitutePlayer,
+  removeFromAllPlayer,
   updateLineupPlayerSubMin,
 } from "../../actions/playersActiontypes.js";
 import { connect } from "react-redux";
@@ -44,7 +45,7 @@ class SubstituteModal extends Component {
               <Form.Control
                 required
                 name = {window.consts.inputNames.outPlayer}
-                onChange={(e) => ctrl.handlePlayerChange(e, this)}
+                onChange={(e) => ctrl.handlePlayerChange(e, this, this.state.inPlayer)}
                 value={this.state.outPlayer}
                 as="select"
               >
@@ -63,7 +64,7 @@ class SubstituteModal extends Component {
               <Form.Control
                 required
                 name = {window.consts.inputNames.inPlayer}
-                onChange={(e) => ctrl.handlePlayerChange(e, this)}
+                onChange={(e) => ctrl.handlePlayerChange(e, this, this.state.outPlayer)}
                 value={this.state.inPlayer}
                 as="select"
               >
@@ -131,8 +132,8 @@ class SubstituteModal extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   addSubstitutePlayer: (player) => dispatch(addSubstitutePlayer(player)),
-  updateLineupPlayerSubMin: (player, submin) =>
-    dispatch(updateLineupPlayerSubMin(player, submin)),
+  removeFromAllPlayer: (playerID) => dispatch(removeFromAllPlayer(playerID)),
+  updateLineupPlayerSubMin: (player, submin) =>dispatch(updateLineupPlayerSubMin(player, submin)),
 });
 
 const mapStateToProps = (state) => ({

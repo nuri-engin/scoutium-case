@@ -4,9 +4,8 @@ import { ErrorMsgWrapper } from "../../styles";
 export const SubstituteModalCtrl = {
     handleSubMinChange: (e, scope) => scope.setState({ subMin: e.target.value }),
     
-    handlePlayerChange: (e, scope) => {
-        let value = e.target.value,
-            stateValue = scope.state[e.target.name];
+    handlePlayerChange: (e, scope, stateValue) => {
+        let value = e.target.value;
         
         if (
             value !== window.translations.enterPlayerName &&
@@ -45,6 +44,7 @@ export const SubstituteModalCtrl = {
         scope.props.updateLineupPlayerSubMin(newOutPlayer.id, subMin);
         scope.props.addSubstitutePlayer(newInPlayer);
         scope.props.modalClose();
+        scope.props.removeFromAllPlayer(newInPlayer.id);
         scope.setState({
             inPlayer: window.translations.enterPlayerName,
             outPlayer: window.translations.enterPlayerName,
