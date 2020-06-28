@@ -1,7 +1,3 @@
-import axios from "axios";
-
-export const API = "API";
-export const SET_PLAYERS_DATA = "SET_PLAYERS_DATA";
 export const ADD_LINEUP_PLAYER = "ADD_PLAYER";
 export const REMOVE_LINEUP_PLAYER = "REMOVE_LINEUP_PLAYER";
 export const TOGGLE_PLAYERS_COMPLETED = "TOGGLES_PLAYER_COMPLETED";
@@ -52,18 +48,3 @@ export const addToAllPlayers = (player) => ({
   type: ADD_TO_ALLPLAYER,
   payload: player,
 });
-
-export const setPlayersData = (players) => ({
-  type: SET_PLAYERS_DATA,
-  payload: { players },
-});
-
-export function fetchPlayers() {
-  return (dispatch) => {
-    return axios
-      .get(`https://api.scoutium.com/api/clubs/4029/players?count=100`)
-      .then(({ data }) => {
-        dispatch(setPlayersData(data.players));
-      });
-  };
-}

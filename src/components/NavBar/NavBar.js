@@ -1,14 +1,6 @@
 import React from "react";
 import { Navbar } from "react-bootstrap";
-import styled from "styled-components";
-import "./NavBar.css";
-
-const NavBarWrapper = styled.div`
-  background-color: #02063f;
-  margin: 0 auto;
-  width: 100%;
-  height: 60px;
-`;
+import { NavBarWrapper } from "../../styles";
 
 function NavBar() {
   return (

@@ -1,5 +1,4 @@
 import {
-  SET_PLAYERS_DATA,
   ADD_LINEUP_PLAYER,
   REMOVE_LINEUP_PLAYER,
   TOGGLE_PLAYERS_COMPLETED,
@@ -8,7 +7,8 @@ import {
   HANDLE_CONFIRMATION_DONE,
   REMOVE_FROM_ALLPLAYER,
   ADD_TO_ALLPLAYER,
-} from "../actions/types.js";
+} from "../actions/playersActiontypes.js";
+import { SET_PLAYERS_DATA } from "../actions/middleware/playersList.js";
 
 const initState = {
   allPlayers: [],

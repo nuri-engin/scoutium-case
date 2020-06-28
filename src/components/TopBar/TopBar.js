@@ -1,19 +1,8 @@
 import React, { Component } from "react";
 import { Navbar, Button } from "react-bootstrap";
 import { connect } from "react-redux";
-import { handleConfirmationDone } from "../../actions/types.js";
-import styled from "styled-components";
-import "./TopBar.css";
-
-let ConfirmMsgWrapper = styled.div`
-  margin-top: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: ##02063f;
-  font-weight: normal;
-  font-size: 24px;
-`;
+import { handleConfirmationDone } from "../../actions/playersActiontypes.js";
+import { ConfirmMsgWrapper } from "../../styles";
 
 class TopBar extends Component {
   handleConfirmation = () => {

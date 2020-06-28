@@ -1,18 +1,9 @@
 import React, { Component } from "react";
-import "./TeamCardsContainer.css";
 import TeamCard from "../../components/TeamCard/TeamCard";
-import styled from "styled-components";
+import { TeamCardContainerWrapper } from "../../styles";
 import { Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
-import { fetchPlayers } from "../../actions/types.js";
-
-let TeamCardContainerWrapper = styled.div`
-  height: 88%;
-  margin: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+import { fetchPlayers } from "../../actions/middleware/playersList.js";
 
 class TeamCardsContainer extends Component {
   componentDidMount = () => {
@@ -26,7 +17,6 @@ class TeamCardsContainer extends Component {
         <Row style={{ height: "100%" }}>
           <Col>
             <TeamCard
-              pickPlayer={this.pickPlayer}
               cardType="allplayers"
               cardTitle="All Players"
               cardPlayers={allPlayers}
