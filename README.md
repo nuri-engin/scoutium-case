@@ -1,68 +1,30 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# # Scoutium Case
 
-## Available Scripts
+You may examine the [presentation slides](https://docs.google.com/presentation/d/1r4R7cesgjsZ0MgcJgeRoBTzIaE4skgUA7comPsqwHQQ/edit?usp=sharing) to have a quick-fact information about the sample application.
 
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## # Protips
+* Structural inspiration 
+ > I'm an expert / long term / enterprise level ExtJS developer. Developing high-level, Abstraction and OOP based application to achieve data-driven, good performance app.
+The `Migrating from ExtJS to React` [blog](https://moduscreate.com/blog/extjs-to-react-migration-to-open-source/) and [repository](https://github.com/ModusCreateOrg/extjs-reactjs-examples) covers a lot of possibilities that i would use within React and the application. 
+Also benefit on another boilerplate work for enterprise-level based React application; [offline-first foundation/react-boilerplate](https://codesandbox.io/s/react-boilerplate-2pii7). 
+* Localization / Translations	
+> Scoutium applications need to be bilingual while the users' background will belong to the different countries, languages, measurement units. etc.
+Constants
+As long as applications getting bigger; application-wide changes would be applied with consts to make changing / refactoring process less pain and trustable.
+ Backend endpoints; Component types, (css) class names, item id; etc. would store within const values. Thus any later change would be  easy.
+* Lazy Loading - Caching
+>End-users should not force to keep request again and again for same data OR should not request to the non-rendered-components until reached that point.
+* Store management / Modelling / Data Validation 
+>  As long as application going to be complex the store management becomes more important manage user data. 
+  Meanwhile any data usage needs to be defined and shaped in a good way for both end-user and back-end satisfaction.
+* Folder Structure
+> MVP level: Current structure is `file-type` based for the sake of simplicity. 
+Enterprise level: Both `file-type` and `feature-type` would be used together. 
+Especially MVVM design pattern lets for the `feature-type`, thus low-level components/class would manage with `feature-type` and most common/generic/abstraction based components/classes should follow the `file-type`.
+* Assets 
+> Provide availability for the `process.env`
+Share constant values all along app with the `process.env`.
+* Test cases 
+> UI, Unit, Flow, Stress test cases and Test Reports.
+* Documentation 
+> Dev target: Exist developer, new comers, interns; Non-Developers: DevOps, Business Analyst; End-user: How to use guides.  
