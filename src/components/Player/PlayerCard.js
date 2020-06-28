@@ -21,8 +21,8 @@ class PlayerCard extends Component {
     lineupPlayers.length === 10 && this.props.togglePlayersCompleted(true);
   };
 
-  removePlayer = (playerID, player) => {
-    this.props.removeLineupPlayerAction(playerID);
+  removePlayer = (player) => {
+    this.props.removeLineupPlayerAction(player.id);
     this.props.addToAllPlayers(player);
     this.props.togglePlayersCompleted(false);
   };
@@ -44,7 +44,7 @@ class PlayerCard extends Component {
     let defineOnClickMethod =
       cardType === window.consts.cardType.allplayers
         ? () => this.addPlayer(player)
-        : () => this.removePlayer(player.id, player);
+        : () => this.removePlayer(player);
 
     let subMinColor =
         cardType === window.consts.cardType.lineup ? { color: "#e63846" } : { color: "#12c990" },

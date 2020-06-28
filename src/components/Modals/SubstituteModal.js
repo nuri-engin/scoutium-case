@@ -5,7 +5,7 @@ import {
   updateLineupPlayerSubMin,
 } from "../../actions/playersActiontypes.js";
 import { connect } from "react-redux";
-import { ErrorMsgWrapper } from "../../styles";
+import { SubstituteModalCtrl as ctrl} from "./SubstituteModalCtrl";
 
 class SubstituteModal extends Component {
   constructor(props) {
@@ -17,78 +17,6 @@ class SubstituteModal extends Component {
       showError: false,
     };
   }
-  handleInPlayerChange = (e) => {
-    let value = e.target.value,
-      outPlayerValue = this.state.outPlayer;
-    if (
-      value !== window.translations.enterPlayerName&&
-      outPlayerValue !== window.translations.enterPlayerName
-    ) {
-      this.setState({ showError: false });
-    }
-    this.setState({ inPlayer: value });
-  };
-  handleOutPlayerChange = (e) => {
-    let value = e.target.value,
-      inPlayerValue = this.state.inPlayer;
-    if (
-      value !== window.translations.enterPlayerName &&
-      inPlayerValue !== window.translations.enterPlayerName
-    ) {
-      this.setState({ showError: false });
-    }
-    this.setState({ outPlayer: e.target.value });
-  };
-  handleSubMinChange = (e) => {
-    this.setState({ subMin: e.target.value });
-  };
-  addSubPlayer = (e) => {
-    e.preventDefault();
-    let { inPlayer, outPlayer, subMin } = this.state,
-      { allPlayers, lineupPlayers } = this.props;
-
-    if (
-      inPlayer === window.translations.enterPlayerName ||
-      outPlayer === window.translations.enterPlayerName
-    ) {
-      this.setState({ showError: true });
-      return;
-    }
-
-    let newInPlayer = allPlayers.find(
-        (player) => player.display_name === inPlayer
-      ),
-      newOutPlayer = lineupPlayers.find(
-        (player) => player.display_name === outPlayer
-      );
-
-    allPlayers.forEach((player) => {
-      player.display_name === inPlayer && (player.subMinDuration = subMin);
-    });
-
-    this.props.updateLineupPlayerSubMin(newOutPlayer.id, subMin);
-    this.props.addSubstitutePlayer(newInPlayer);
-    this.props.modalClose();
-    this.setState({
-      inPlayer: window.translations.enterPlayerName,
-      outPlayer: window.translations.enterPlayerName,
-      subMin: "",
-    });
-  };
-
-  showErrorMsg = () => {
-    return (
-      <ErrorMsgWrapper>
-        <img
-          style={{ marginTop: -1 }}
-          className="mr-2"
-          src="./assets/error.png"
-          alt="error"
-        />
-        {window.translations.pleaseCompleteTheForm}
-      </ErrorMsgWrapper>
-    );
-  };
 
   render() {
     let {
@@ -97,6 +25,7 @@ class SubstituteModal extends Component {
       addSubPlayerModal,
       modalClose,
     } = this.props;
+    
     return (
       <Modal
         size="sm"
@@ -107,14 +36,14 @@ class SubstituteModal extends Component {
       >
         <Modal.Body>
           <span style={{ color: "#02063f", fontSize: 16 }}>{window.translations.addSubstition}</span>
-          <Form onSubmit={this.addSubPlayer}>
+          <Form onSubmit={(e) => ctrl.addSubPlayer(e, this)}>
             <Form.Group controlId="outPlayer">
               <Form.Label style={{ color: "#586f8f", fontSize: 12 }}>
                 {window.translations.outPlayer}
               </Form.Label>
               <Form.Control
                 required
-                onChange={this.handleOutPlayerChange}
+                onChange={(e) => ctrl.handleOutPlayerChange(e, this)}
                 value={this.state.outPlayer}
                 as="select"
               >
@@ -132,7 +61,7 @@ class SubstituteModal extends Component {
               </Form.Label>
               <Form.Control
                 required
-                onChange={this.handleInPlayerChange}
+                onChange={(e) => ctrl.handleInPlayerChange(e, this)}
                 value={this.state.inPlayer}
                 as="select"
               >
@@ -152,7 +81,7 @@ class SubstituteModal extends Component {
               </Form.Label>
               <Form.Control
                 required
-                onChange={this.handleSubMinChange}
+                onChange={(e) => ctrl.handleSubMinChange(e, this)}
                 value={this.state.subMin}
                 type="number"
                 min="1"
@@ -190,7 +119,7 @@ class SubstituteModal extends Component {
                 </Button>
               </Col>
             </Form.Group>
-            {this.state.showError && this.showErrorMsg()}
+            {this.state.showError && ctrl.showErrorMsg()}
           </Form>
         </Modal.Body>
       </Modal>
