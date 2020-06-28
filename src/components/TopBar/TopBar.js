@@ -3,11 +3,9 @@ import { Navbar, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import { handleConfirmationDone } from "../../actions/playersActiontypes.js";
 import { ConfirmMsgWrapper } from "../../styles";
+import { TopBarCtrl as ctrl} from "./TopBarCtrl";
 
 class TopBar extends Component {
-  handleConfirmation = () => {
-    this.props.handleConfirmationDone();
-  };
   render() {
     let { playersCompleted, confirmationDone } = this.props;
 
@@ -42,7 +40,7 @@ class TopBar extends Component {
             <Navbar.Collapse className="justify-content-end"></Navbar.Collapse>
             <Button
               disabled={!playersCompleted}
-              onClick={this.handleConfirmation}
+              onClick={() => ctrl.handleConfirmation(this)}
               style={{
                 marginTop: 6,
                 backgroundColor: "#3852ff",

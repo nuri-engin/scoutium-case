@@ -10,23 +10,9 @@ import {
 } from "../../actions/playersActiontypes.js";
 import { MdDelete } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
+import { PlayerCardCtrl as ctrl} from "./PlayerCardCtrl";
 
 class PlayerCard extends Component {
-  addPlayer = (player) => {
-    let { lineupPlayers } = this.props;
-    if (lineupPlayers.length <= 11) {
-      this.props.addLineupPlayerAction(player);
-      this.props.removeFromAllPlayer(player.id);
-    }
-    lineupPlayers.length === 10 && this.props.togglePlayersCompleted(true);
-  };
-
-  removePlayer = (player) => {
-    this.props.removeLineupPlayerAction(player.id);
-    this.props.addToAllPlayers(player);
-    this.props.togglePlayersCompleted(false);
-  };
-
   render() {
     let { player, cardType, playersCompleted, confirmationDone } = this.props,
       { display_name, image_url, position, subMinDuration } = player;
@@ -43,8 +29,8 @@ class PlayerCard extends Component {
 
     let defineOnClickMethod =
       cardType === window.consts.cardType.allplayers
-        ? () => this.addPlayer(player)
-        : () => this.removePlayer(player);
+        ? () => ctrl.addPlayer(player, this)
+        : () => ctrl.removePlayer(player, this);
 
     let subMinColor =
         cardType === window.consts.cardType.lineup ? { color: "#e63846" } : { color: "#12c990" },

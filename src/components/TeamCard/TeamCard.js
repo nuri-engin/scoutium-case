@@ -4,6 +4,7 @@ import PlayerCard from "../Player/PlayerCard";
 import { EmptyTextWrapper, TeamNameWrapper } from "../../styles";
 import { connect } from "react-redux";
 import SubstituteModal from "../Modals/SubstituteModal.js";
+import { TeamCardCtrl as ctrl} from "./TeamCardCtrl";
 
 class TeamCard extends Component {
   constructor(props) {
@@ -16,17 +17,7 @@ class TeamCard extends Component {
       showError: false,
     };
   }
-  handleModalClose = () => {
-    this.setState({ addSubPlayerModal: false });
-    this.setState({
-      inPlayer: window.translations.enterPlayerName,
-      outPlayer: window.translations.enterPlayerName,
-      subMin: "",
-    });
-  };
-  handleModalOpen = () => {
-    this.setState({ addSubPlayerModal: true });
-  };
+  
   render() {
     let {
         cardTitle,
@@ -98,7 +89,7 @@ class TeamCard extends Component {
                   hidden={confirmationDone}
                   style={{ fontSize: 13, color: "#12c990" }}
                   variant="link"
-                  onClick={this.handleModalOpen}
+                  onClick={() => ctrl.handleModalOpen(this)}
                 >
                   + Add Substitues
                 </Button>
@@ -110,7 +101,7 @@ class TeamCard extends Component {
                   hidden={confirmationDone}
                   disabled={substitutePlayers.length > 2}
                   style={{ fontSize: 13, color: "#12c990" }}
-                  onClick={this.handleModalOpen}
+                  onClick={() => ctrl.handleModalOpen(this)}
                   variant="link"
                 >
                   + Add Substitution
@@ -123,7 +114,7 @@ class TeamCard extends Component {
         </Card>
         <SubstituteModal
           addSubPlayerModal={this.state.addSubPlayerModal}
-          modalClose={this.handleModalClose}
+          modalClose={() => ctrl.handleModalClose(this)}
         />
       </>
     );
